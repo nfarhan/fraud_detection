@@ -1,0 +1,43 @@
+# Core Data Science Stack
+pandas==2.1.4
+numpy==1.26.4
+scipy==1.13.1
+
+# Machine Learning
+scikit-learn==1.6.1
+imbalanced-learn==0.13.0
+xgboost==3.0.5
+lightgbm==4.6.0
+
+# Data Validation & Utility
+great_expectations==1.6.0
+
+# Experiment Tracking
+mlflow==3.3.2
+
+# Database  Performance
+duckdb==1.4.0
+
+# Visualization
+matplotlib==3.10.3
+seaborn==0.13.2
+plotly==6.2.0
+
+# Statistical Analysis
+statsmodels==0.14.4
+
+# Utilities
+python-dateutil===2.9.0.post0
+pytz==2025.2
+tqdm==4.67.1
+
+# Jupyter
+jupyter==1.1.1
+jupyter-black==0.4.0
+jupyterlab==4.4.3
+ipywidgets==8.1.7
+
+# Code Quality
+black==25.1.0
+jupyter-black==0.4.0
+flake8==7.3.0
