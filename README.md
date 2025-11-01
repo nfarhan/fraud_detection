@@ -244,8 +244,8 @@ mlflow-ui --backend-store-uri file:///path/to/fraud_detection/models/mlruns
 
 ## 👤 Author
 
-[Nowraj Farhan]
-Aspiring Data Scientist | Machine Learning Engineer
+[Nowraj Farhan]  
+Aspiring Data Scientist | Machine Learning Engineer  
 [Portfolio] (https://github.com/nfarhan) | [LinkedIn] (https://linkedin.com/in/nowrajfarhan)
 
 ## 📝 License
