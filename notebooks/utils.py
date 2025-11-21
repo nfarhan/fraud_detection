@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Optional
 
 import matplotlib.pyplot as plt
 import mlflow
@@ -23,7 +24,7 @@ for directory in [DATA_RAW, DATA_PROCESSED, DATA_EXTERNAL, MODELS_DIR, MLFLOW_DI
     directory.mkdir(parents=True, exist_ok=True)
 
 
-def setup_mlflow(experiment_name: str = "fraue_detection") -> None:
+def setup_mlflow(experiment_name: str = "fraud_detection") -> None:
     """
     Initialize MLflow experiment tracking.
 
@@ -37,12 +38,12 @@ def setup_mlflow(experiment_name: str = "fraue_detection") -> None:
     print(f"📁 Tracking URI: {MLFLOW_DIR}")
 
 
-def load_fraud_data(filepath: str | None = None) -> pd.DataFrame:
+def load_fraud_data(filepath: Optional[str] = None) -> pd.DataFrame:
     """
     Load credit card fraud dataset with validation.
 
     Args:
-        filepath: Path to CSV file. If None, downloads latest version directly from Kaggle and saves in data/raw directory.
+        filepath: Path to CSV file. If None, searches data/raw directory.
 
     Returns:
         DataFrame with fraud transaction data
@@ -69,7 +70,7 @@ def load_fraud_data(filepath: str | None = None) -> pd.DataFrame:
             raise FileNotFoundError(
                 f"Dataset not found in {DATA_RAW}\n"
                 f"Expected filenames: {possible_names}"
-                f"Please download from https://www.kaggle.com/api/v1/datasets/download/mlg-ulb/creditcardfraud\\"
+                f"Please download from: https://www.kaggle.com/api/v1/datasets/download/mlg-ulb/creditcardfraud\\"
                 f"And place it in {DATA_RAW}"
             )
 
@@ -81,7 +82,7 @@ def load_fraud_data(filepath: str | None = None) -> pd.DataFrame:
     return df
 
 
-def quick_data_summary(df: pd.DataFrame):
+def quick_data_summary(df: pd.DataFrame) -> None:
     """
     Print comphrehensive data summary with key statistics.
 
@@ -89,12 +90,12 @@ def quick_data_summary(df: pd.DataFrame):
         df: DataFrame to summarize
     """
     print("=" * 60)
-    print("QUICK DATA SUMMARY")
+    print("📋 QUICK DATA SUMMARY")
     print("=" * 60)
 
     # Basic info
     print(f"\nShape: {df.shape[0]:,} rows x {df.shape[1]} columns")
-    print(f"Memory usage: {df.memory_usage(deep=True).sum() / 1024**2:.2f} MB")
+    print(f"Memory Usage: {df.memory_usage(deep=True).sum() / 1024**2:.2f} MB")
 
     # Column types
     print("\nColumn Types:")
@@ -142,7 +143,7 @@ def plot_target_distribution(df: pd.DataFrame, target_col: str = "Class") -> Non
     axes[0].set_ylabel("Count", fontsize=12)
     axes[0].set_title(f"{target_col} Distribution (Counts)", fontsize=14, fontweight="bold")
     axes[0].set_xticks(range(len(target_counts)))
-    axes[0].set_xticklabel(labels)
+    axes[0].set_xticklabels(labels)
     axes[0].grid(axis="y", alpha=0.3)
 
     # Add count labels
@@ -156,7 +157,7 @@ def plot_target_distribution(df: pd.DataFrame, target_col: str = "Class") -> Non
     axes[1].set_ylabel("Percentage (%)", fontsize=12)
     axes[1].set_title(f"{target_col} Distribution (Percentage)", fontsize=14, fontweight="bold")
     axes[1].set_xticks(range(len(target_counts)))
-    axes[1].set_xticklabel(labels)
+    axes[1].set_xticklabels(labels)
     axes[1].grid(axis="y", alpha=0.3)
 
     # Add percentage labels
@@ -170,7 +171,7 @@ def plot_target_distribution(df: pd.DataFrame, target_col: str = "Class") -> Non
     if len(target_counts) == 2:
         imbalance_ratio = target_counts.min() / target_counts.max()
         print("\n📊 Class Imbalance Assessment:")
-        print(f"\tRatio: {imbalance_ratio:.4f} ({1/imbalance_ratio:.1f}):1")
+        print(f"\tRatio: {imbalance_ratio:.4f} ({1/imbalance_ratio:.1f}:1)")
 
         if imbalance_ratio < 0.01:
             severity = "🔴 EXTREME imbalance - specialized techniques required"
@@ -179,7 +180,7 @@ def plot_target_distribution(df: pd.DataFrame, target_col: str = "Class") -> Non
         elif imbalance_ratio < 0.5:
             severity = "🟡MODERATE imbalance - consider class weights"
         else:
-            severity = "🟢 BALANCED class"
+            severity = "🟢 BALANCED classes"
 
         print(f"\tSeverity: {severity}")
 
