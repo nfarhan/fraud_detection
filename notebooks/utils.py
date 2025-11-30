@@ -17,7 +17,14 @@ DATA_RAW = PROJECT_ROOT / "data" / "raw"
 DATA_PROCESSED = PROJECT_ROOT / "data" / "processed"
 DATA_EXTERNAL = PROJECT_ROOT / "data" / "external"
 MODELS_DIR = PROJECT_ROOT / "models"
+CONFIGS_DIR = PROJECT_ROOT / "configs"
 MLFLOW_DIR = PROJECT_ROOT / "models" / "mlruns"
+
+# File names used across notebooks
+# Phase 1
+TXT_VALIDATION_SUMMARY = "validation_summary.txt"
+JSON_DATA_DICTIONARY = "data_dictionary.json"
+TXT_PHASE_1_COMPLETION_REPORT = "phase_1_completion_report.txt"
 
 # Ensure directories exist
 for directory in [DATA_RAW, DATA_PROCESSED, DATA_EXTERNAL, MODELS_DIR, MLFLOW_DIR]:
