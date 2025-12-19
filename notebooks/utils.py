@@ -19,6 +19,7 @@ DATA_EXTERNAL = PROJECT_ROOT / "data" / "external"
 MODELS_DIR = PROJECT_ROOT / "models"
 CONFIGS_DIR = PROJECT_ROOT / "configs"
 MLFLOW_DIR = PROJECT_ROOT / "models" / "mlruns"
+PLOTS_DIR = PROJECT_ROOT / "reports" / "figures"
 
 # File names used across notebooks
 # Phase 1
